@@ -134,11 +134,21 @@ if 'perfil' not in st.session_state:
 
 # --- 5. LÓGICA DE API ---
 def call_api(path, params):
-    url = f"https://api.mercadopublico.cl/servicios/v1/Publico/{path}&ticket=AA15FBCB-11BF-4385-BAEF-97C28C6052F2"
+    # El ticket ahora está directamente en la cadena de la URL
+    ticket = "AA15FBCB-11BF-4385-BAEF-97C28C6052F2"
+    url = f"https://api.mercadopublico.cl/servicios/v1/Publico/{path}?ticket={ticket}"
+    
     try:
+        # Los parámetros adicionales (fecha, estado, etc.) se añaden mediante requests
         r = requests.get(url, params=params, timeout=15)
-        return r.json().get('Listado', [])
-    except: return []
+        if r.status_code == 200:
+            return r.json().get('Listado', [])
+        else:
+            st.error(f"Error de API: {r.status_code}")
+            return []
+    except Exception as e:
+        st.error(f"Error de conexión: {e}")
+        return []
 
 # --- 6. DASHBOARD PRINCIPAL ---
 st.title("🏢 Panel Asisteme")
