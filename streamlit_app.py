@@ -6,7 +6,6 @@ from datetime import datetime
 # --- 1. SEGURIDAD Y CONFIGURACIÓN ---
 try:
     GEMINI_KEY = st.secrets["GEMINI_API_KEY"]
-    MP_TICKET = st.secrets["MP_TICKET"]
     genai.configure(api_key=GEMINI_KEY)
     model = genai.GenerativeModel('gemini-1.5-flash')
 except Exception:
@@ -135,8 +134,7 @@ if 'perfil' not in st.session_state:
 
 # --- 5. LÓGICA DE API ---
 def call_api(path, params):
-    url = f"https://api.mercadopublico.cl/servicios/v1/Publico/{path}"
-    params["ticket"] = MP_TICKET
+    url = f"https://api.mercadopublico.cl/servicios/v1/Publico/{path}&ticket=AA15FBCB-11BF-4385-BAEF-97C28C6052F2"
     try:
         r = requests.get(url, params=params, timeout=15)
         return r.json().get('Listado', [])
