@@ -16,6 +16,7 @@ except Exception:
 # --- 2. DICCIONARIOS TÉCNICOS (ESTADOS COMO TEXTO) ---
 DICCIONARIOS = {
     # --- MAPEADO COMPLETO DE TIPOLOGÍAS (23 TIPOS) ---
+    
 TIPOS_LIC = {
     "L1": "Licitación Pública Menor a 100 UTM",
     "LE": "Licitación Pública Entre 100 y 1000 UTM",
