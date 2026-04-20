@@ -56,7 +56,7 @@ DICCIONARIOS = {
 }
 
 # --- 3. ESTILOS DE INTERFAZ ---
-st.set_page_config(page_title="Asisteme AI v2", layout="wide", page_icon="🏢")
+st.set_page_config(page_title="Asisteme", layout="wide", page_icon="🦉")
 st.markdown("""
     <style>
     .stApp { background-color: #FFFFFF; }
@@ -68,7 +68,7 @@ st.markdown("""
 
 # --- 4. PERFIL DE USUARIO ---
 if 'perfil' not in st.session_state:
-    st.title("🤝 Bienvenido a Asisteme")
+    st.title("Bienvenido a Asisteme")
     with st.form("onboarding"):
         st.subheader("Configura tu Perfil")
         c1, c2 = st.columns(2)
