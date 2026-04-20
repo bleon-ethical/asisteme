@@ -179,15 +179,26 @@ with c_lista:
     if 'resultados' in st.session_state:
         st.subheader(f"🔍 Disponibles: {len(st.session_state.resultados)}")
         for lic in st.session_state.resultados[:12]:
+            # Usamos .get() para evitar el KeyError si falta algún dato
+            estado = lic.get('Estado', 'Ver')
+            nombre = lic.get('Nombre', 'Sin nombre')
+            id_ext = lic.get('CodigoExterno', 'S/I')
+            # Aquí estaba el error: agregamos un valor por defecto
+            organismo = lic.get('NombreOrganismo', 'Organismo no especificado')
+
             with st.container():
                 st.markdown(f"""
                 <div class="card">
-                    <span class="badge">{lic.get('Estado', 'Ver')}</span>
-                    <h4 style="margin:10px 0;">{lic['Nombre']}</h4>
-                    <p style="font-size:13px; color:#94A3B8 !important;">ID: {lic['CodigoExterno']}<br><b>{lic['NombreOrganismo']}</b></p>
+                    <span class="badge">{estado}</span>
+                    <h4 style="margin:10px 0;">{nombre}</h4>
+                    <p style="font-size:13px; color:#94A3B8 !important;">
+                        ID: {id_ext}<br>
+                        <b>{organismo}</b>
+                    </p>
                 </div>
                 """, unsafe_allow_html=True)
-                if st.button("Analizar Viabilidad", key=lic['CodigoExterno']):
+                
+                if st.button("Analizar Viabilidad", key=id_ext):
                     st.session_state.focus = lic
 
 with c_analisis:
