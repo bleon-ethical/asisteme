@@ -8,7 +8,7 @@ import math
 try:
     GEMINI_KEY = st.secrets["GEMINI_API_KEY"]
     genai.configure(api_key=GEMINI_KEY)
-    model = genai.GenerativeModel('gemini-1.5-flash')
+    model = genai.GenerativeModel('gemini-2.5-flash')
 except Exception:
     st.error("⚠️ Configura GEMINI_API_KEY en los Secrets de Streamlit.")
     st.stop()
